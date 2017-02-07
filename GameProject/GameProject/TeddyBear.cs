@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -141,6 +141,15 @@ namespace GameProject
             BounceLeftRight();
 
             // fire projectile as appropriate
+            elapsedShotMilliseconds += gameTime.ElapsedGameTime.Milliseconds;
+            if(elapsedShotMilliseconds > firingDelay)
+            {
+                elapsedShotMilliseconds = 0;
+                firingDelay = GetRandomFiringDelay();
+                Projectile tprojectile = new Projectile(ProjectileType.TeddyBear, Game1.GetProjectileSprite(ProjectileType.TeddyBear),
+                    drawRectangle.Center.X, drawRectangle.Center.Y - GameConstants.TeddyBearProjectileOffset, GetProjectileYVelocity());
+                Game1.AddProjectile(tprojectile);
+            }
             // timer concept (for animations) introduced in Chapter 7
 
         }

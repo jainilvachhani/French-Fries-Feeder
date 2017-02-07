@@ -87,6 +87,8 @@ namespace GameProject
             // load sprite font
 
             // load projectile and explosion sprites
+            teddyBearProjectileSprite = Content.Load<Texture2D>("graphics\\teddybearprojectile");
+            frenchFriesSprite = Content.Load<Texture2D>("graphics\\frenchfries");
 
             // add initial game objects
 
@@ -116,7 +118,8 @@ namespace GameProject
                 Exit();
 
             // get current mouse state and update burger
-
+            MouseState mouse = Mouse.GetState();
+            burger.Update(gameTime, mouse);
             // update other game objects
             foreach (TeddyBear bear in bears)
             {
@@ -190,7 +193,16 @@ namespace GameProject
         public static Texture2D GetProjectileSprite(ProjectileType type)
         {
             // replace with code to return correct projectile sprite based on projectile type
-            return frenchFriesSprite;
+            if (type == ProjectileType.FrenchFries)
+            {
+                return frenchFriesSprite;
+            }
+            else if (type == ProjectileType.TeddyBear)
+            {
+                return teddyBearProjectileSprite;
+            }
+            else
+                return frenchFriesSprite;
         }
 
         /// <summary>
@@ -199,7 +211,7 @@ namespace GameProject
         /// <param name="projectile">the projectile to add</param>
         public static void AddProjectile(Projectile projectile)
         {
-
+            projectiles.Add(projectile);
         }
 
         #endregion
